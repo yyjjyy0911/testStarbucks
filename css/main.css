@@ -1,0 +1,279 @@
+/* 폰트 설정 */
+/* import형식으로 가지고 올 때에도 내가 만들 CSS보다 위에다 선언 */
+/* <style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+</style> */
+
+
+/* 앞으로 만들 css아래에 사용 */
+
+/* common 공통의 스타일 정의 */
+body{font-family: 'Nanum Gothic', sans-serif;color: #333;font-weight: 400;line-height: 1.4;}
+
+img{display: block;}
+
+.inner{width: 1100px;margin: auto;position: relative;} /* 왜 기준설정한다고? */
+
+.btn{width: 130px;padding: 10px;border: 2px solid #333;border-radius: 4px;color: #333;font-weight: bold;text-align: center;display: block;box-sizing: border-box;transition: all 0.4s;cursor: pointer;}
+.btn:hover{background: #333;color: #fff;}
+
+.btn.btn--brown{color: #592b18;border-color: #592b18;}
+.btn.btn--brown:hover{background: #592b18;color: #fff;}
+
+.btn.btn--white{color: #fff;border-color: #fff;}
+.btn.btn--white:hover{background: #fff;color: #333;}
+
+.btn.btn--gold{color: #d9aa8a;border-color: #d9aa8a;}
+.btn.btn--gold:hover{background: #d9aa8a;color: #fff;}
+
+.btn.btn--revers{background: #333;color: #fff;}
+.btn.btn--revers:hover{background: transparent;color: #333;} /* transparent? */
+
+/* scroll Magic으로 연결할 CSS ----------------------------------------- */
+/* 맨처음 브라우저 로딩 시 안 보이게 설정 */
+.back-to-position{opacity: 0;transition: all 1s;}
+
+/* 왼쪽 -> 오른쪽 등장하는 모션의 시작위치 */
+.back-to-position.to-right{transform: translateX(-150px);}
+
+/* 오른쪽 -> 왼족 등장하는 모션의 시작위치 */
+.back-to-position.to-left{transform: translateX(150px);}
+
+/* show가 추가되면 실행할 모션 */
+.show .back-to-position{opacity: 1;transform: translateX(0);}
+.show .back-to-position.delay-0{transition-delay: 0s;}
+.show .back-to-position.delay-1{transition-delay: 0.3s;}
+.show .back-to-position.delay-2{transition-delay: 0.6s;}
+.show .back-to-position.delay-3{transition-delay: 0.9s;}
+
+
+/* -------------------------------------------------------------------------- */
+
+/* HEADER 영역 --------------------------------------------------- */
+header{width: 100%;background: #f6f6f0;border-bottom: 1px solid #c3c3c3;position: fixed;top: 0;z-index: 100;} /* 왜 position fixed? */
+header .inner{height: 120px;}
+header .inner h1{position: absolute;top: 0;bottom: 0;margin: auto;height: 75px;} /* 높이를 주어야 가운데정렬 먹힘, 실제 이미지의 높이만큼 줘야 함 */
+header .inner .sub-menu{position: absolute;right: 0;top: 10px;display: flex;}
+header .inner .sub-menu ul.menu{display: flex;}
+header .inner .sub-menu ul.menu li{position: relative;}
+header .inner .sub-menu ul.menu li::before{content: "";display: block;width: 1px;height: 12px;background: #e5e5e5;position: absolute;top: 0;bottom: 0;margin: auto;} /* content는 사용하지 않아도 무조건 있어야함, before after는 인라인요소이기 때문에 display: bolck 해주어야 함 */
+header .inner .sub-menu ul.menu li a{display: block;padding: 10px;font-size: 12px;color: #656565;}
+header .inner .sub-menu ul.menu li a:hover{color: #000;}
+header .inner .sub-menu ul.menu li:first-child::before{display: none;}
+
+header .inner .sub-menu .search{height: 34px;position: relative;transition: all 0.4s;}
+header .inner .sub-menu .search input{height: 28px;width: 30px;border-radius: 5px;border: 1px solid #ccc;background: #fff;text-indent: 5px;}
+header .inner .sub-menu .search input:focus{width: 150px;border-color: #669900;outline: none;}
+header .inner .sub-menu .search span{position: absolute;top: 5px;bottom: 0;margin: auto;left: 5px;right: 0;} /* 가운데정렬 기능이 먹히지 않음 */
+header .inner .sub-menu .search.focused span{opacity: 0;}
+
+
+/* main menu */
+header .inner nav ul.main-menu{display: flex;position: absolute;right: 0;bottom: 0;}
+header .inner nav ul.main-menu > li .item__name{padding: 10px 20px;cursor: pointer;font-size: 14px;} /* 메뉴 이름이 길 땐 width 주지 말고 padding 주는 게 나음 */
+header .inner nav ul.main-menu > li:hover .item__name{background: #2c2a29;color: #669900;text-decoration: underline;border-radius: 6px 6px 0 0;}
+
+header .inner nav ul.main-menu > li .item__contents{width: 100%;position: fixed;left: 0;display: none;} /* fixed는 무조건 부모요소를 상속받음? */
+header .inner nav ul.main-menu > li:hover .item__contents{display: block;}
+
+/* 1층 */
+header .inner nav ul.main-menu > li .item__contents .contents__menu{background: #2c2a29;}
+.item__contents ul.inner{display: flex;padding: 20px 0;justify-content: space-around;height: 230px;}
+.item__contents ul.inner li h4{font-size: 14px;color: #fff;font-weight: bold;padding: 3px 0 15px;}
+.item__contents ul.inner li > ul li{font-size: 12px;color: #999;cursor: pointer;padding: 5px 0;}
+.item__contents ul.inner li > ul li:hover{color: #669900;}
+
+/* 2층 */
+.contents__texture{background: url(../images/main_menu_pattern.jpg);padding: 20px 0;}
+.contents__texture .inner h4{color: #999;font-weight: bold;}
+.contents__texture .inner p{color: #669900;margin: 5px 0 15px;}
+
+
+
+/* 뱃지영역 ------------------------------------------------------------- */
+.badges{position: fixed;top: 150px;right: 15px;z-index: 20;}
+.badges div{margin-bottom: 15px;}
+.badges div img{border-radius: 10px;box-shadow: 4px 4px 10px rgba(0,0,0,0.3);cursor: pointer;}
+
+/* main visual aera ---------------------------------------------------------------- */
+.visual{margin-top: 120px;}
+.visual .inner{height: 650px;}
+.visual .inner .title{position: absolute;top: 88px;left: -10px;}
+.visual .inner .title a.btn{position: absolute;top: 260px;left: 173px;}
+.visual .inner .img-box .cup1.image{position: absolute;bottom: 0;right: -48px;}
+.visual .inner .img-box .cup1.text{position: absolute;top: 40px;right: 180px;}
+.visual .inner .img-box .cup2.image{position: absolute;bottom: 0;right: 180px;}
+.visual .inner .img-box .cup2.text{position: absolute;top: 300px;right: 450px;}
+.visual .inner .img-box .spoon{position: absolute;bottom: 0;left: 250px;}
+
+.visual .fade-in{opacity: 0;}
+
+
+
+/* 공지사항 area -------------------------------------------- */
+.notice .notice-line{position: relative;}
+.notice .notice-line .bg-left{position: absolute;top: 0;left: 0;width: 50%;height: 100%;background: #333;}
+.notice .notice-line .bg-right{position: absolute;top: 0;right: 0;width: 50%;height: 100%;background: #f6f5ef;}
+
+.notice .notice-line .inner{display: flex;height: 65px;}
+.notice .notice-line > .inner > .inner__left{width: 60%;height: 100%;background: #333;display: flex;align-items: center;}
+.notice .notice-line > .inner > .inner__left h2{color: #fff;font-size: 17px;width: 80px;font-weight: 700;}
+.notice .notice-line > .inner > .inner__left .more{display: block;width: 62px;height: 62px;display: flex;align-items: center;margin-right: 20px;}
+.notice .notice-line > .inner > .inner__left .more span{font-size: 35px;color: #fff;}
+
+/* 공지사항 : swiper slide */
+.notice .notice-line > .inner > .inner__left .swiper{height: 65px;}
+.notice .notice-line > .inner > .inner__left .swiper .swiper-slide{display: flex;align-items: center;}
+.notice .notice-line > .inner > .inner__left .swiper a{color: #fff;}
+
+.notice .notice-line > .inner > .inner__right{width: 40%;height: 100%;background: #f6f5ef;display: flex;justify-content: center;align-items: center;}
+.notice .notice-line > .inner > .inner__right h2{margin-right: 10px;}
+.notice .notice-line > .inner > .inner__right span{font-size: 35px;cursor: pointer;}
+
+
+
+/* promotion Swiper slide */
+.notice .promotion{height: 670px;background: #f6f5ef;position: relative;transition: height 0.4s;overflow: hidden;}
+.notice .promotion.hide{height: 0;}
+
+.notice .promotion .swiper{
+  width: calc(819px * 3 + 20px);
+  height: 600px;
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  margin-left: calc((819px * 3 + 20px) / -2); /* 가운데정렬 */
+}
+
+.notice .promotion .swiper .swiper-slide{opacity: 0.5;transition: opacity 1s;position: relative;}
+.notice .promotion .swiper .swiper-slide-active{opacity: 1;}
+.notice .promotion .swiper .swiper-slide a{position: absolute;bottom: 50px;left: 0;right: 0;margin: auto;}
+
+.notice .promotion .swiper .swiper-pagination-bullet{background: transparent url(../images/promotion_slide_pager.png);
+width: 13px;height: 13px;outline: none;background-size: contain;
+}
+.notice .promotion .swiper .swiper-pagination-bullet-active{background: url(../images/promotion_slide_pager_on.png);}
+
+.notice .promotion .swiper .swiper-prev, .notice .promotion .swiper .swiper-next{
+  width: 42px;height: 42px;outline: none;border: 2px solid #333;position: absolute;top: 270px;z-index: 5;border-radius: 50%;cursor: pointer;display: flex;justify-content: center;align-items: center;
+}
+.notice .promotion .swiper .swiper-prev{left: 50%;margin-left: -470px;}
+.notice .promotion .swiper .swiper-next{right: 50%;margin-right: -470px;}
+.notice .promotion .swiper .swiper-prev:hover, .notice .promotion .swiper .swiper-next:hover{background: #333;color: #fff;}
+
+
+
+/* REWARES area */
+.rewards{position: relative;z-index: 10;}
+.rewards .bg-left{width: 50%;height: 100%;background: #272727;position: absolute;top: 0;left: 0;}
+.rewards .bg-right{width: 50%;height: 100%;background: #d5c798;position: absolute;top: 0;right: 0;}
+.rewards .inner{background: url(../images/rewards.jpg);height: 241px;}
+.rewards .inner .btn-group{position: absolute;right: 0;bottom: 25px;width: 250px;display: flex;flex-wrap: wrap;}
+.rewards .inner .btn-group .sign-in{width: 130px;margin-right: 10px;}
+.rewards .inner .btn-group .sign-up{width: 110px;}
+.rewards .inner .btn-group .gift{margin-top: 10px;flex: 1;} /* flex: 1;은 flex-grow: ;와 같음 */
+
+
+/* YOUTUBE VIDEO area */
+.youtube{position: relative;width: 100%;height: 700px;background: #333;overflow: hidden;z-index: 10;}
+.youtube .youtube__area{width: 1920px;background: orange;position: absolute;left: 50%;margin-left: calc(1920px / -2);top: 50%;margin-top: calc(1920px * 9 / 16 / -2);}
+.youtube .youtube__area #player{width: 100%;height: 100%;position: absolute;top: 0;left: 0;}
+.youtube .youtube__area::before{content: "";display: block;width: 100%;height: 0;padding-bottom: 56.25%;} /* 이건 왜? */
+
+/* 유튜브 영상 위로 넣을 패턴이지미(영상 위에 막대 이런 거 안 보이게 하기 위함) */
+.youtube .youtube__cover{position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: url(../images/video_cover_pattern.png);}
+
+/* 유튜브 영상 위로 둥둥 떠있는 이미지 */
+/* .youtube .inner{} 이거 왜 안 씀? */
+.youtube .inner .floating1{position: absolute;top: 50px;left: 0;}
+.youtube .inner .floating2{position: absolute;top: 350px;left: 150px;}
+
+
+/* season-product area---------------------- */
+.season-product{background: url(../images/season_product_bg.jpg);}
+.season-product .inner{height: 400px;}
+.season-product .inner .floating3{position: absolute;top: -200px;right: 0;z-index: 21;}
+.season-product .inner .text-group{position: absolute;top: 110px;right: 100px;}
+.season-product .inner .text-group .text2{margin: 10px 0 15px;}
+
+
+/* RESERVE COFFEE ----------------------------------- */
+.reserve-coffee{background: url(../images/reserve_bg.jpg);}
+.reserve-coffee .inner{height: 400px;}
+.reserve-coffee .inner .reserve_logo{position: absolute;top: 110px;left: 0;}
+.reserve-coffee .inner .text-group{position: absolute;top: 124px;left: 208px;}
+.reserve-coffee .inner .reserve_image{position: absolute;top: 0;right: 0;}
+
+
+/* PICK YOUR FAVORITE --------------------------------------- */
+.pick-your-favorite{background: url(../images/favorite_bg.jpg) no-repeat center fixed;background-size: cover;} /* background-size: ;는 축약버전 안됨 */
+.pick-your-favorite .inner{padding: 110px 0;}
+.pick-your-favorite .inner .text-group{width: 360px;display: flex;flex-wrap: wrap;justify-content: flex-end;}
+.pick-your-favorite .inner .text-group .text2{margin: 40px 0;}
+
+
+/* RESERVE STORE ---------------------------------------------- */
+.reserve-store{background: url(../images/reserve_store_bg.jpg) no-repeat center fixed;background-size: cover;}
+.reserve-store .inner{height: 600px;display: flex;justify-content: center;align-items: center;}
+.reserve-store .inner .medal{width: 334px;height: 334px;cursor: pointer;perspective: 600px;} /* perspective 원근감 */
+
+.reserve-store .inner .medal .front, .reserve-store .inner .medal .back{width: 334px;height: 334px;backface-visibility: hidden;transition: all 1s;position: absolute;}
+
+.reserve-store .inner .medal .front{position: absolute;transform: rotateY(0);}
+.reserve-store .inner .medal:hover .front{transform: rotateY(-180deg);}
+.reserve-store .inner .medal .back{transform: rotateY(-180deg);}
+.reserve-store .inner .medal .back .btn{position: absolute;top: 230px;left: 0;right: 0;margin: auto;}
+.reserve-store .inner .medal:hover .back{transform: rotateY(0);}
+
+
+/* FIND THE STORE ------------------------------------------- */
+.find-store{background: url(../images/find_store_bg.jpg);}
+.find-store .inner{height: 400px;}
+.find-store .inner .texture1{position: absolute;top: 0;left: 400px;}
+.find-store .inner .texture2{position: absolute;right: 0;bottom: 0;}
+.find-store .inner .picture{border-radius: 50%;box-shadow: 2px 2px 8px rgba(0,0,0,0.5);position: absolute;}
+.find-store .inner .picture1{top: -60px;left: 0;}
+.find-store .inner .picture2{top: 150px;left: 250px;}
+.find-store .inner .text-group{position: absolute;left: 550px;top: 120px;}
+.find-store .inner .text-group .text2{margin: 20px 0;}
+
+
+/* AWARDS ---------------------------------------------------------------- */
+/* 설명 다시 듣기 */
+.awards{background: #272727;}
+.awards .inner{padding: 40px 0;}
+.awards .inner .swiper{width: 100%;height: 40px;}
+.awards .inner .swiper-prev, .awards .inner .swiper-next{width: 42px;height: 42px;border-radius: 50%;border: 2px solid #fff;color: #fff;display: flex;justify-content: center;align-items: center;cursor: pointer;position: absolute;top: 0;bottom: 0;margin: auto;background: #c8c8c8;opacity: 0.3;transition: all 0.3s;}
+.awards .inner .swiper-prev:hover, .awards .inner .swiper-next:hover{background: #fff;color: #333;}
+.awards .inner .swiper-prev{left: -100px;}
+.awards .inner .swiper-next{right: -100px;}
+
+
+/* FOOTER -------------------------------- */
+footer{background: #272727;border-top: 1px solid #333;}
+footer .inner{padding: 40px 0 60px;}
+
+footer .inner .menu{display: flex;justify-content: center;}
+footer .inner .menu li{position: relative;}
+footer .inner .menu li::before{content: "";position: absolute;top: 0;bottom: 0;margin: auto;width: 3px;height: 3px;background: #555;}
+footer .inner .menu li a{padding: 15px;color: #ccc;}
+
+footer .inner .menu li:first-child::before{display: none;} /* content 안에 넣은 게 아니기 때문에 display: none; 해줌 */
+
+footer .inner .menu li:first-child a{color: #669900;font-weight: bold;}
+
+footer .inner .btn-group{margin: 30px 0;display: flex;justify-content: center;}
+footer .inner .btn-group a{color: #ccc;border: 2px solid #fff;padding: 10px 15px;border-radius: 4px;font-weight: bold;transition: all 0.3s;} /* flex로 a가 item 박스 됐기 때문에 display: block; 사용 안 함 */
+footer .inner .btn-group a:nth-child(2){margin: 0 20px;}
+footer .inner .btn-group a:hover{background: #fff;color: #333;}
+
+footer .inner address{text-align: center;color: #999;}
+footer .inner address span{margin: 0 15px;}
+
+footer .inner .copyright{color: #999;text-align: center;margin: 10px 0 20px;}
+
+footer .inner > img{margin: auto;}
+
+
+/* TOP BUTTON ------------------------------------------- */
+#to-top{position: fixed;right: 20px;bottom: 30px;color: #fff;border: 2px solid #fff;padding: 10px;border-radius: 10px;display: flex;align-items: center;cursor: pointer;background: #333;z-index: 20;}
